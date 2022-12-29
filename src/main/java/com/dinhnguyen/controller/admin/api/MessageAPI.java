@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dinhnguyen.mapper.MessageMapper;
-import com.dinhnguyen.model.TinNhan;
+import com.dinhnguyen.model.Message;
 import com.dinhnguyen.service.IMessageService;
 import com.dinhnguyen.util.httpUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,7 +25,7 @@ public class MessageAPI  extends HttpServlet{
 		ObjectMapper mapper = new ObjectMapper();
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("application/json");
-		TinNhan mes = httpUtil.of(req.getReader()).toUsers(TinNhan.class);
+		Message mes = httpUtil.of(req.getReader()).toUsers(Message.class);
 		mes = messageService.save(mes);
 		mapper.writeValue(res.getOutputStream(), mes);
 	}

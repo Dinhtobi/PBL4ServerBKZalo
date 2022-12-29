@@ -31,7 +31,6 @@ public class UserService implements IUserService{
 
 	@Override
 	public UserModel Update(UserModel updateUS) {
-		//UserModel oldUserModel = usDAO.FindOne(updateUS.getId_users());
 		usDAO.Update(updateUS);
 		return usDAO.FindOne(updateUS.getId());
 	}

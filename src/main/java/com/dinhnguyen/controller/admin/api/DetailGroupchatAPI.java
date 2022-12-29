@@ -42,7 +42,7 @@ public class DetailGroupchatAPI extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("application/json");
 		DetailGroupChat ct = httpUtil.of(req.getReader()).toUsers(DetailGroupChat.class);
-		iDetailgroupchatService.Del(ct);
+		iDetailgroupchatService.Del(ct.getId_nhomchat());
 		mapper.writeValue(res.getOutputStream(), ct);
 	}
 }

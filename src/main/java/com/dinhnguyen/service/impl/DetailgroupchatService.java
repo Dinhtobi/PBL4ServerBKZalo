@@ -17,10 +17,11 @@ import com.dinhnguyen.service.IUserService;
 
 public class DetailgroupchatService implements IDetailgroupchatService {
 	@Inject
-	private IUserService iUserService;
+	private IUserDAO userDAO;
 	@Inject
 	private IDetailgroupchatDAO iDetailgroupchatDAO;
-
+	@Inject
+	private IGroupchatDAO groupchatDAO; 
 	@Override
 	public DetailGroupChat save(DetailGroupChat ctNhomChat) {
 		iDetailgroupchatDAO.save(ctNhomChat);
@@ -28,8 +29,8 @@ public class DetailgroupchatService implements IDetailgroupchatService {
 	}
 
 	@Override
-	public void Del(DetailGroupChat ctNhomChat) {
-		iDetailgroupchatDAO.Del(ctNhomChat);
+	public void Del(Long id_NhomChat) {
+		iDetailgroupchatDAO.Del(id_NhomChat);
 
 	}
 
@@ -40,6 +41,20 @@ public class DetailgroupchatService implements IDetailgroupchatService {
 
 	@Override
 	public void Update(DetailGroupChat ctNhomChat) {
+		List<DetailGroupChat> list = iDetailgroupchatDAO.findAll(ctNhomChat.getId_nhomchat());
+		int inGroup = 0 ;
+		for(DetailGroupChat i : list) {
+			if(i.getTrangthai() == 1) {
+				inGroup++ ;
+			}
+		}
+		if(inGroup<=1) {
+			GroupChat groupChat = new GroupChat();
+			groupChat.setId_nhomchat(ctNhomChat.getId_nhomchat());
+			groupChat.setTrangthai(0);
+			groupChat.setType("admin");
+			groupchatDAO.Update(groupChat);
+		}
 		iDetailgroupchatDAO.Update(ctNhomChat);
 	}
 
@@ -69,7 +84,7 @@ public class DetailgroupchatService implements IDetailgroupchatService {
 
 	@Override
 	public List<DetailGroupChat> findAll(Pageble pageble, Long id_nhomchat) {
-		List<UserModel> listuser = iUserService.findAll();
+		List<UserModel> listuser = userDAO.findAll();
 		List<DetailGroupChat> listmember = iDetailgroupchatDAO.findAll(pageble, id_nhomchat);
 		for (int i = 0; i < listmember.size(); i++) {
 			for (int j = 0; j < listuser.size(); j++) {

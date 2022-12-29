@@ -43,8 +43,6 @@ public class GroupController extends HttpServlet {
 		}else if(model.getType().equals(SystemConstant.EDIT)) {
 			if(model.getId_nhomchat()!=null) {
 				model = groupchatService.findone(model.getId_nhomchat());
-			}else {
-				
 			}
 			view = "/views/admin/Group/edit.jsp";
 		}

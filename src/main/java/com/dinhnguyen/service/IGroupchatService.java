@@ -8,7 +8,7 @@ import com.dinhnguyen.paging.Pageble;
 
 public interface IGroupchatService {
 	GroupChat save(GroupChat nhomChat);
-	void Del(Long id_nhomchat);
+	void Del(long[] ids);
 	void Update(GroupChat nhomChat);
 	List<GroupChat> findAllnhomchatbyiduser(Long id_user);
 	List<GroupChat> findAll(Pageble pageble);

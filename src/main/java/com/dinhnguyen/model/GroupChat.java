@@ -3,7 +3,7 @@ package com.dinhnguyen.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupChat {
+public class GroupChat extends AbtracModel<GroupChat> {
 	private Long id_nhomchat;
 	private String tennhom;
 	private Long id_nguoitao ;

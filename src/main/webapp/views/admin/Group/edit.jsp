@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <c:url var= "APIurl" value = "/api-admin-groupchat"/>
-<c:url var= "UserURL" value = "/admin-group"/>
+<c:url var= "GroupURL" value = "/admin-group"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +74,7 @@
 						</div>
 						<input type="hidden" value="${model.id_nhomchat}" id="id_nhomchat" name = "id_nhomchat"/>
 						<input type="hidden" value="admin" id="type" name = "type"/>
-						
+						<input type="hidden" value="${model.id_nguoitao}" id=id_nguoitao name = "id_nguoitao"/>
 						</form>
 					</div>
 				</div>
@@ -101,7 +101,7 @@
 				data:JSON.stringify(data),
 				dataType:'json',
 				success: function (result) {
-					window.location.href = "${UserURL}?type=list&page=1&maxPageItem=5&sortName=id_nhomchat&sortBy=asc";
+					window.location.href = "${GroupURL}?type=list&page=1&maxPageItem=5&sortName=id_nhomchat&sortBy=asc";
 				},
 				error: function (error) {
 					console.log(error);

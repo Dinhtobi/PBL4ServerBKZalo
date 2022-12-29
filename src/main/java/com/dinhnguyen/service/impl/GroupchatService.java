@@ -1,10 +1,15 @@
 package com.dinhnguyen.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import com.dinhnguyen.Dao.IDetailgroupchatDAO;
 import com.dinhnguyen.Dao.IGroupchatDAO;
+import com.dinhnguyen.Dao.IUserDAO;
+import com.dinhnguyen.model.DetailGroupChat;
 import com.dinhnguyen.model.GroupChat;
 import com.dinhnguyen.model.UserModel;
 import com.dinhnguyen.paging.Pageble;
@@ -13,9 +18,11 @@ import com.dinhnguyen.service.IUserService;
 
 public class GroupchatService implements IGroupchatService{
 	@Inject
-	private IUserService userService;
+	private IUserDAO userDAO;
 	@Inject
 	private IGroupchatDAO iGroupchatDAO; 
+	@Inject
+	private IDetailgroupchatDAO detailgroupchatDAO ;
 	@Override
 	public GroupChat save(GroupChat nhomChat) {
 		Long id_nhomchat = iGroupchatDAO.save(nhomChat);
@@ -23,8 +30,11 @@ public class GroupchatService implements IGroupchatService{
 	}
 
 	@Override
-	public void Del(Long id_nhomchat) {
-		iGroupchatDAO.Del(id_nhomchat);
+	public void Del(long[] ids) {
+		for(long i : ids) {
+			detailgroupchatDAO.Del(i);
+			iGroupchatDAO.Del(i);
+		}
 	}
 
 	@Override
@@ -32,7 +42,27 @@ public class GroupchatService implements IGroupchatService{
 		if(nhomChat.getType().equals("haveuser")) {
 			nhomChat.setTrangthai(1);
 		}else {
-			//nhomChat.setTrangthai(0);
+			if(nhomChat.getTrangthai()== 1) {
+				DetailGroupChat detailgroup = new DetailGroupChat();
+				detailgroup.setTrangthai(nhomChat.getTrangthai());
+				detailgroup.setId_nguoidung(nhomChat.getId_nguoitao());
+				detailgroup.setId_nhomchat(nhomChat.getId_nhomchat());
+				Date dnow = new Date();
+				SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+				detailgroup.setThoigianthamgia(ft.format(dnow).toString());
+				detailgroupchatDAO.Update(detailgroup);
+			}else {
+				List<DetailGroupChat> list = detailgroupchatDAO.findAll(nhomChat.getId_nhomchat());
+				for(DetailGroupChat i : list) {
+					if(i.getTrangthai()== 1 ) {
+						Date dnow = new Date();
+						SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+						i.setThoigianroikhoi(ft.format(dnow));
+						i.setTrangthai(0);
+						detailgroupchatDAO.Update(i);
+					}
+				}
+			}
 		}
 		iGroupchatDAO.Update(nhomChat);
 	}
@@ -44,7 +74,7 @@ public class GroupchatService implements IGroupchatService{
 
 	@Override
 	public List<GroupChat> findAll(Pageble pageble) {
-		List<UserModel> listuser = userService.findAll();
+		List<UserModel> listuser = userDAO.findAll();
 		List<GroupChat> listgroup = iGroupchatDAO.findAll(pageble);
 		for(int i = 0 ; i<listgroup.size(); i++) {
 			for(int j = 0 ; j < listuser.size(); j++) {

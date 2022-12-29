@@ -6,19 +6,19 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.dinhnguyen.Dao.IMessageDAO;
-import com.dinhnguyen.model.TinNhan;
+import com.dinhnguyen.model.Message;
 import com.dinhnguyen.service.IMessageService;
 
 public class MessageService implements IMessageService{
 	@Inject
 	private IMessageDAO messageDAO;
 	@Override
-	public List<TinNhan> findAll() {
+	public List<Message> findAll() {
 		return messageDAO.findAll();
 	}
 
 	@Override
-	public TinNhan save(TinNhan message) {
+	public Message save(Message message) {
 		Long id_mes = messageDAO.save(message);
 		return messageDAO.findone(id_mes);
 	}
@@ -29,7 +29,7 @@ public class MessageService implements IMessageService{
 	}
 
 	@Override
-	public List<TinNhan> findAllbyid(Long id_nguoigui, Long id_nguoinhan, Long id_nhomchat) {
+	public List<Message> findAllbyid(Long id_nguoigui, Long id_nguoinhan, Long id_nhomchat) {
 		
 		return messageDAO.findAllbyid(id_nguoigui, id_nguoinhan, id_nhomchat);
 	}

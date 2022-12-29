@@ -9,7 +9,7 @@ import com.dinhnguyen.paging.Pageble;
 
 public interface IDetailgroupchatDAO extends GenericDAO<DetailGroupChat> {
 	Long save(DetailGroupChat ctNhomChat);
-	void Del(DetailGroupChat ctNhomChat);
+	void Del(Long id_NhomChat);
 	DetailGroupChat findone(Long id_nhomchat,Long id_nguoidung);
 	List<DetailGroupChat> findAll(Long id_nhomchat);
 	void Update(DetailGroupChat ctNhomChat);

@@ -1,13 +1,14 @@
 package com.dinhnguyen.model;
 
-import java.sql.Timestamp;
-public class TinNhan {
+
+public class Message {
 	private Long id_tinnhan;
 	private Long id_nguoigui;
 	private Long id_nguoinhan;
 	private String noidung ;
 	private String  thoigiantao ;
 	private Long id_nhomchat ;
+	private int fileformat ;
 	public Long getId_tinnhan() {
 		return id_tinnhan;
 	}
@@ -43,6 +44,12 @@ public class TinNhan {
 	}
 	public void setId_nhomchat(Long id_nhomchat) {
 		this.id_nhomchat = id_nhomchat;
+	}
+	public int getFileformat() {
+		return fileformat;
+	}
+	public void setFileformat(int fileformat) {
+		this.fileformat = fileformat;
 	}
 
 	

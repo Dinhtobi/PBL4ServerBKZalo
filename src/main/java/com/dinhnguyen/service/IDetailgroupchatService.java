@@ -8,7 +8,7 @@ import com.dinhnguyen.paging.Pageble;
 
 public interface IDetailgroupchatService {
 	DetailGroupChat save(DetailGroupChat ctNhomChat);
-	void Del(DetailGroupChat ctNhomChat);
+	void Del(Long id_NhomChat);
 	List<DetailGroupChat> findall(Long id_nhomchat);
 	void Update(DetailGroupChat ctNhomChat);
 	void SaveorUpdate(DetailGroupChat ctNhomChat);

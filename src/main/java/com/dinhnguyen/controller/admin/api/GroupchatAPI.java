@@ -38,7 +38,6 @@ public class GroupchatAPI extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("application/json");
 		GroupChat nc = httpUtil.of(req.getReader()).toUsers(GroupChat.class);
-		
 		idGroupchatService.Update(nc);
 		mapper.writeValue(res.getOutputStream(), "Da cap nhat");
 	}
@@ -49,7 +48,8 @@ public class GroupchatAPI extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		res.setContentType("application/json");
 		GroupChat nc = httpUtil.of(req.getReader()).toUsers(GroupChat.class);
-		idGroupchatService.Update(nc);
+		
+		idGroupchatService.Del(nc.getIds());
 		mapper.writeValue(res.getOutputStream(), "Đã xoá");
 	}
 

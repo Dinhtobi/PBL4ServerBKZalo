@@ -19,9 +19,13 @@ public class DetailgroupchatDAO extends AbstractDAO<DetailGroupChat> implements 
 	}
 
 	@Override
-	public void Del(DetailGroupChat ctNhomChat) {
-		String sql = "delete from ctnhomnhat where id_nguoidung = ? and id_nhomchat = ?";
-		update(sql, ctNhomChat.getId_nguoidung(), ctNhomChat.getId_nhomchat());
+	public void Del(Long id_NhomChat) {
+		try {
+			String sql = "delete from ctnhomchat where id_nhomchat = ?";
+			update(sql ,id_NhomChat);
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
 	}
 
 	@Override

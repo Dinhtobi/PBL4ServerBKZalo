@@ -35,17 +35,7 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="row">
-							<div class="col-xs-12">							
-							<button id = "btDelete" type = "button"
-							class = "dt-button button-html5 btn btn-white btn-primary btn-bold"
-							data-toggle ="tooltip" title= "Xoá nhóm" 
-							>
-							<span>
-							<i class="fa fa-trash-o" aria-hidden="true"></i>
-							</span>
-							</button>
-							
-							
+							<div class="col-xs-12">	
 								<div class="table-responsive">
 									<table class="table">
 										<thead>
